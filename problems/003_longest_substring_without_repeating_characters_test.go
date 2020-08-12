@@ -40,13 +40,13 @@ func lengthOfLongestSubstring2(s string) int {
 		}
 
 		dict[s[right]] = true
-		res = max(res, right-left+1)
+		res = maxInt(res, right-left+1)
 		right++
 	}
 	return res
 }
 
-func max(a, b int) int {
+func maxInt(a, b int) int {
 	if a > b {
 		return a
 	}
