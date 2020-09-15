@@ -6,54 +6,6 @@ import (
 )
 
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-	var totalLens = len(nums1) + len(nums2)
-
-	var nums = make([]int, totalLens)
-	for c, c1, c2 := 0, 0, 0; c < totalLens; c++ {
-		if !(c1 < len(nums1)) {
-			nums[c] = nums2[c2]
-			c2++
-			continue
-		}
-		if !(c2 < len(nums2)) {
-			nums[c] = nums1[c1]
-			c1++
-			continue
-		}
-		if nums1[c1] < nums2[c2] {
-			nums[c] = nums1[c1]
-			c1++
-		} else {
-			nums[c] = nums2[c2]
-			c2++
-		}
-	}
-
-	if totalLens%2 == 0 {
-		return (float64(nums[totalLens/2-1]) + float64(nums[totalLens/2])) / 2
-	} else {
-		return float64(nums[totalLens/2])
-	}
-}
-
-func BenchmarkFindMedianSortedArrays1(b *testing.B) {
-	nums1 := []int{1, 2, 3, 5, 9, 10, 20, 31, 41, 51, 67, 73, 74, 75}
-	nums2 := []int{3, 4, 7, 9, 12, 15, 18, 21, 34, 54, 65, 86, 94, 100, 123}
-	for i := 0; i < b.N; i++ {
-		findMedianSortedArrays(nums1, nums2)
-	}
-}
-
-func TestFindMedianSortedArrays2(t *testing.T) {
-	nums1 := []int{3}
-	nums2 := []int{1, 2, 4}
-	actual := findMedianSortedArrays2(nums1, nums2)
-	if actual != 2.5 {
-		t.Fatalf("actual is %f", actual)
-	}
-}
-
-func findMedianSortedArrays2(nums1 []int, nums2 []int) float64 {
 	var longNums []int
 	var shortNums []int
 	if len(nums1) < len(nums2) {
@@ -96,4 +48,21 @@ func findMedianSortedArrays2(nums1 []int, nums2 []int) float64 {
 		}
 	}
 	return 0
+}
+
+func BenchmarkFindMedianSortedArrays(b *testing.B) {
+	nums1 := []int{1, 2, 3, 5, 9, 10, 20, 31, 41, 51, 67, 73, 74, 75}
+	nums2 := []int{3, 4, 7, 9, 12, 15, 18, 21, 34, 54, 65, 86, 94, 100, 123}
+	for i := 0; i < b.N; i++ {
+		findMedianSortedArrays(nums1, nums2)
+	}
+}
+
+func TestFindMedianSortedArrays(t *testing.T) {
+	nums1 := []int{3}
+	nums2 := []int{1, 2, 4}
+	actual := findMedianSortedArrays(nums1, nums2)
+	if actual != 2.5 {
+		t.Fatalf("actual is %f", actual)
+	}
 }
