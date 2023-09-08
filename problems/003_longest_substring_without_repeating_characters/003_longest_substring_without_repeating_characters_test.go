@@ -46,6 +46,41 @@ func lengthOfLongestSubstring2(s string) int {
 	return res
 }
 
+func lengthOfLongestSubstring3(s string) int {
+
+	if len(s) < 2 {
+		return len(s)
+	}
+
+	maxWindow := 1
+	left := 0
+	right := 1
+
+	for right < len(s) {
+		if isDuplicate(&s, left, right) {
+			left++
+		} else {
+			curLens := right - left + 1
+			if maxWindow < curLens {
+				maxWindow = curLens
+			}
+			right++
+		}
+	}
+
+	return maxWindow
+}
+
+func isDuplicate(s *string, left int, right int) bool {
+	checkChar := (*s)[right]
+	for i := left; i < right; i++ {
+		if (*s)[i] == checkChar {
+			return true
+		}
+	}
+	return false
+}
+
 func maxInt(a, b int) int {
 	if a > b {
 		return a

@@ -36,7 +36,7 @@
 //
 // Related Topics 栈 树 深度优先搜索 二叉树 👍 1120 👎 0
 
-package problems
+package binary_tree_preorder_traversal_test
 
 // Definition for a binary tree node.
 type TreeNode struct {

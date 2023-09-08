@@ -36,7 +36,13 @@
 //
 // Related Topics 栈 树 深度优先搜索 二叉树 👍 1080 👎 0
 
-package problems
+package binary_tree_postorder_traversal_test
+
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
 
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
